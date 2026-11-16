@@ -1,0 +1,53 @@
+﻿
+@model RoseType
+
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">Add Rose Type</h3>
+            <nav aria-label="breadcrumb">
+                
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        
+                        <form asp-action="AddRoseType" asp-controller="Product" method="post" enctype="multipart/form-data" class="forms-sample">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="RoseType_Name">Rose Type Name</label>
+                                <input asp-for="RoseType_Name" type="text" class="form-control" id="exampleInputName1" placeholder="Enter Rose Type Name">
+                                <span asp-validation-for="RoseType_Name" class="text-danger"></span>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="RoseType_Description">Rose Type Descriptioname</label>
+                                <input asp-for="RoseType_Description" type="text" class="form-control" id="exampleInputName1" placeholder="Enter Rose Type Description">
+                                <span asp-validation-for="RoseType_Description" class="text-danger"></span>
+
+                            </div>
+                            
+                           <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewRoseType">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

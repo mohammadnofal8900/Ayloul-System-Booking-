@@ -1,0 +1,192 @@
+﻿@* @model BookingConfirmViewModel
+
+
+<div class="card">
+
+    <div class="card-header">
+        <h3>Confirm Booking</h3>
+    </div>
+
+
+    <div class="card-body">
+
+        <h5>Booking Information</h5>
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Name</th>
+                <td>@Model.Booking.Name</td>
+            </tr>
+
+
+            <tr>
+                <th>Description</th>
+                <td>@Model.Booking.Description</td>
+            </tr>
+
+
+            <tr>
+                <th>Note</th>
+                <td>@Model.Booking.Note</td>
+            </tr>
+
+
+            <tr>
+                <th>Location</th>
+                <td>@Model.Booking.Location?.City</td>
+            </tr>
+
+        </table>
+
+
+
+        <h5>Services</h5>
+
+        <ul class="list-group mb-3">
+
+            @foreach (var service in Model.Services)
+            {
+                <li class="list-group-item">
+                    @service.Service_Name
+                    - @service.Price JD
+                </li>
+            }
+
+        </ul>
+
+
+
+        <h5>Price Details</h5>
+
+
+        <table class="table table-bordered">
+
+            <tr>
+                <th>Base Price</th>
+                <td>@Model.BasePrice JD</td>
+            </tr>
+
+
+            <tr>
+                <th>Services Price</th>
+                <td>@Model.ServicePrice JD</td>
+            </tr>
+
+
+            <tr>
+                <th>Delivery Price</th>
+                <td>@Model.LocationPrice JD</td>
+            </tr>
+
+
+            <tr>
+                <th>Service Fee (0.05%)</th>
+                <td>@Model.ServiceFee JD</td>
+            </tr>
+
+
+            <tr class="table-success">
+                <th>Total Price</th>
+                <td>
+                    <strong>
+                        @Model.TotalPrice JD
+                    </strong>
+                </td>
+            </tr>
+
+            <tr class="table-success">
+                <th>Id</th>
+                <td>
+                    <strong>
+                        @Model.Customer JD
+                    </strong>
+                </td>
+            </tr>
+
+
+        </table>
+
+        
+
+        <form asp-action="ConfirmBooking"
+              asp-controller="Booking"
+              asp-area="User"
+              method="post">
+
+            @Html.AntiForgeryToken()
+            <input type="hidden" asp-for="Booking.Name" />
+            <input type="hidden" asp-for="Booking.Customer_Id" />
+
+            <input type="hidden" asp-for="Booking.Phone_Number" />
+
+            <input type="hidden" asp-for="Booking.Description" />
+
+            <input type="hidden" asp-for="Booking.Note" />
+
+            <input type="hidden" asp-for="Booking.Event_Date" />
+
+            <input type="hidden" asp-for="Booking.Date_Time" />
+
+            <input type="hidden" asp-for="Booking.Location_Id" />
+
+            <input type="hidden" asp-for="Booking.Background_Id" />
+
+            <input type="hidden" asp-for="Booking.FrameColor_Id" />
+
+            <input type="hidden" asp-for="Booking.RoseType_Id" />
+
+            <input type="hidden" asp-for="Booking.RoseColor1_Id" />
+
+            <input type="hidden" asp-for="Booking.RoseColor2_Id" />
+            <input type="hidden" asp-for="Note_Image" />
+            <input type="hidden" asp-for="TotalPrice" />
+            <input type="hidden" asp-for="BasePrice" />
+
+            <input type="hidden" asp-for="ServicePrice" />
+
+            <input type="hidden" asp-for="LocationPrice" />
+
+            <input type="hidden" asp-for="ServiceFee" />
+
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="radio"
+                       name="Booking.paymentMethod"
+                       value="Cash"
+                       checked />
+
+                <label>Cash</label>
+            </div>
+
+
+            <div class="form-check">
+                <input class="form-check-input"
+                       type="radio"
+                       name="Booking.paymentMethod"
+                       value="Visa" />
+
+                <label>Visa</label>
+            </div>
+
+
+            @foreach (var id in Model.ServiceIds)
+            {
+                <input type="hidden"
+                       name="ServiceIds"
+                       value="@id" />
+            }
+
+
+            <button type="submit"
+                    class="btn btn-success">
+                Confirm Booking
+            </button>
+
+
+        </form>
+
+
+    </div>
+
+</div> *@

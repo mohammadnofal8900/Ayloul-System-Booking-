@@ -1,0 +1,88 @@
+﻿@model IEnumerable<ChatRoom>
+
+@{
+    ViewData["Title"] = "Customer Chats";
+}
+
+<div class="card">
+    <div class="card-body">
+  
+
+        <table class="table">
+            <thead>
+            <thead >
+
+                <tr>
+
+                    <th>
+                        Customer
+                    </th>
+
+                    <th>
+                        Messages
+                    </th>
+
+                    <th>
+                        Created At
+                    </th>
+
+                    <th>
+                        Action
+                    </th>
+
+                </tr>
+
+            </thead>
+
+
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+
+                    <tr>
+
+
+                        <td>
+                            @item.Customer?.UserName
+                        </td>
+
+
+                        <td>
+                            @item.Messages?.Count()
+                        </td>
+
+
+                        <td>
+                            @item.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                        </td>
+
+
+                        <td>
+
+                            <a asp-action="ChatRoom"
+                               asp-controller="Chat"
+                               asp-area="Admin"
+                               asp-route-id="@item.ChatRoom_Id"
+                               class="btn btn-primary btn-sm">
+
+                                Open Chat
+
+                            </a>
+
+                        </td>
+
+
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+          </div>
+          <!-- content-wrapper ends -->
+          <!-- partial:../../partials/_footer.html -->
+     
+          <!-- partial -->
+        </div>
+

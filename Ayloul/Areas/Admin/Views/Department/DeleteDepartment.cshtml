@@ -1,0 +1,58 @@
+﻿@model Department
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="card-header bg-danger text-white" style="margin-bottom:30px">
+            <h4 class="mb-0" style="padding:40px">Delete Department</h4>
+        </div>
+
+
+        <div class="card-body">
+
+            <h5 class="text-danger">
+                Are you sure you want to delete this Department ?
+            </h5>
+
+            <hr />
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+                    <label class="fw-bold">Name</label>
+                    <p>@Model.Department_Name</p>
+                </div>
+
+
+               
+
+            <form asp-action="DeleteEmployee" method="post">
+
+                <input type="hidden" asp-for="Department_Id" />
+
+
+                <button type="submit" class="btn btn-danger">
+                    <i class="mdi mdi-delete"></i>
+                    Delete
+                </button>
+
+
+                 <a class="btn btn-light" asp-area="Admin" asp-controller="Department" asp-action="ViewDepartment">Cancel</a>
+                   
+                
+
+            </form>
+
+    </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023 . All rights reserved. Distributed by <a href="#">Ayloul</a></span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted &amp; made with <i class="mdi mdi-heart text-danger"></i></span>
+        </div>
+    </footer>
+    <!-- partial -->
+</div>

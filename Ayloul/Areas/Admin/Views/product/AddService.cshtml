@@ -1,0 +1,73 @@
+﻿@model Service
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">Add Service </h3>
+            <nav aria-label="breadcrumb">
+
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <form asp-action="AddService" asp-controller="Product" method="post" enctype="multipart/form-data" class="forms-sample">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                           
+
+                            <div class="form-group">
+                                <label asp-for="Service_Name">Service Name </label>
+                                <input asp-for="Service_Name" type="text" class="form-control" id="exampleInputName1" placeholder="Enter Service Name">
+                                <span asp-validation-for="Service_Name" class="text-danger"></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <label asp-for="Price"> Price</label>
+                                <input asp-for="Price" type="number" class="form-control" id="exampleInputName1" placeholder="Price ">
+                                <span asp-validation-for="Price" class="text-danger"></span>
+
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label asp-for="ImageFile">File upload</label>
+                                <input type="file" name="img[]" class="file-upload-default">
+                                <div class="input-group col-xs-12">
+                                    <input asp-for="ImageFile" type="file" class="form-control file-upload-info" disabled="" placeholder="Upload Rose Color Image">
+                                    <span class="input-group-append">
+                                        <button class="file-upload-browse btn btn-gradient-primary py-3" type="button">Upload</button>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewService">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+   
+    <!-- partial -->
+</div>
+
+

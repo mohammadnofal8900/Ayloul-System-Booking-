@@ -1,0 +1,156 @@
+﻿@model Ayloul.Areas.Admin.Models.ServicesApiVm
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        
+        <div class="page-header">
+            <h3 class="page-title">Add Service</h3>
+
+            <nav aria-label="breadcrumb">
+                <a asp-area="Admin"
+                   asp-controller="SearvicesApi"
+                   asp-action="Index"
+                   class="btn btn-light">
+                    Back
+                </a>
+            </nav>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                </div>
+            </div>
+
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                </div>
+            </div>
+
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <form asp-area="Admin"
+                              asp-controller="SearvicesApi"
+                              asp-action="Create"
+                              method="post"
+                              enctype="multipart/form-data"
+                              class="forms-sample">
+
+                            @Html.AntiForgeryToken()
+
+                            <div asp-validation-summary="ModelOnly"
+                                 class="text-danger">
+                            </div>
+
+                            <!-- Service Name -->
+                            <div class="form-group">
+                                <label asp-for="Service_Name">
+                                    Service Name
+                                </label>
+
+                                <input asp-for="Service_Name"
+                                       type="text"
+                                       class="form-control"
+                                       placeholder="Enter Service Name" />
+
+                                <span asp-validation-for="Service_Name"
+                                      class="text-danger">
+                                </span>
+                            </div>
+
+
+                            <!-- Price -->
+                            <div class="form-group">
+                                <label asp-for="Price">
+                                    Price
+                                </label>
+
+                                <input asp-for="Price"
+                                       type="number"
+                                       class="form-control"
+                                       placeholder="Price" />
+
+                                <span asp-validation-for="Price"
+                                      class="text-danger">
+                                </span>
+                            </div>
+
+
+                            <!-- Status -->
+                            <div class="form-group">
+                                <label asp-for="Is_Active">
+                                    Status
+                                </label>
+
+                                <select asp-for="Is_Active"
+                                        class="form-control">
+
+                                    <option value="true">
+                                        Active
+                                    </option>
+
+                                    <option value="false">
+                                        Not Active
+                                    </option>
+
+                                </select>
+                            </div>
+
+
+                            <!-- Image -->
+                            <div class="form-group">
+
+                                <label asp-for="ImageFile">
+                                    File upload
+                                </label>
+
+                                <input asp-for="ImageFile"
+                                       type="file"
+                                       class="form-control"
+                                       accept="image/*" />
+                                <span asp-validation-for="ImageFile"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+
+                            <!-- Buttons -->
+                            <button type="submit"
+                                    class="btn btn-gradient-primary me-2">
+                                Submit
+                            </button>
+
+                            <a asp-area="Admin"
+                               asp-controller="SearvicesApi"
+                               asp-action="Index"
+                               class="btn btn-light">
+                                Cancel
+                            </a>
+
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

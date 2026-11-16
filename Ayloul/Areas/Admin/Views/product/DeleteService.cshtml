@@ -1,0 +1,66 @@
+﻿
+@model Service
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="card-header bg-danger text-white" style="margin-bottom:30px">
+            <h4 class="mb-0" style="padding:40px"> Delete Rose Type</h4>
+        </div>
+
+
+        <div class="card-body">
+
+            <h5 class="text-danger">
+                are you sure you need to delete this Rose Type : @Model.Service_Name
+            </h5>
+
+            <hr />
+
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Name</label>
+                <p>@Model.Service_Name</p>
+            </div>
+
+
+
+
+            <form asp-action="DeleteService" asp-controller="Product" method="post" enctype="multipart/form-data">
+                <h3>are you sure you need to delete this Rose Color : @Model.Service_Name .</h3>
+
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div><input type="hidden" asp-for="Service_Id" /></div>
+
+                <label asp-for="Service_Name">Service Name</label>
+                <input type="text" readonly asp-for="Service_Name" />
+                <span asp-validation-for="Service_Name" class="text text-danger"></span>
+
+                <label asp-for="Price">Price Price</label>
+                <input type="text" readonly asp-for="Price" />
+                <span asp-validation-for="Price" class="text text-danger"></span>
+
+
+
+                
+                <button type="submit" class="btn btn-danger">
+                    <i class="mdi mdi-delete"></i>
+                    Delete
+                </button>
+
+                <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewService">Cancel</a>
+
+
+            </form>
+
+            </div>
+        </div>
+        </div>
+       
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        
+        <!-- partial -->

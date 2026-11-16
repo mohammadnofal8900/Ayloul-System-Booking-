@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Payment>
+
+
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">@Localizer["ViewPayment"]</h4>
+        <p class="card-description">
+
+
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+
+                                    <th>Payment_Id</th>
+                                    <th>Booking_Id</th>
+                                    <th>Booking Number</th>
+                                    <th>Amount</th>
+                                    <th>Currency</th>
+                                    <th>Transaction_Id</th>
+                                    <th>Payment_Date</th>
+                                    <th>Payment_Method</th>
+                                    <th>Status</th>
+
+
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.Payment_Id</td>
+                                        <td>@item.Booking_Id</td>
+                                        <td>@item.Booking?.Booking_Number</td>
+                                        <td>@item.Amount</td>
+                                        <td>@item.Currency</td>
+                                        <td>@item.Transaction_Id</td>
+                                        <td>@item.Payment_Date</td>
+                                        <td>@item.Payment_Method</td>
+                                        <td>@item.Status</td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+   
+    <!-- partial -->
+</div>

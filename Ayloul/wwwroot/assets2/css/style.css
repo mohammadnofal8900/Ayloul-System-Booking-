@@ -1,0 +1,100 @@
+:root {
+  --bg: #faf9f7;
+  --ink: #2a2724;
+  --muted: #8a8378;
+  --accent: #c98a95;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.content-block {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 18vh 24px;
+  text-align: center;
+}
+
+.content-block h1 { font-size: 2.4rem; margin-bottom: 0.5rem; letter-spacing: 0.02em; }
+.content-block h2 { font-size: 1.6rem; }
+.content-block p { color: var(--muted); line-height: 1.6; }
+
+/* ---------------------------------------------------------------------
+   The 3D section: tall scroll track with a pinned (sticky) viewport.
+   Height controls how much scrolling = how much cinematic rotation.
+   300vh ≈ generous, unhurried rotation. Tune to taste.
+--------------------------------------------------------------------- */
+.rose-section {
+  position: relative;
+  height: 300vh;
+  background: linear-gradient(180deg, #faf9f7 0%, #f3efe9 50%, #faf9f7 100%);
+}
+
+.rose-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------------------
+   The 2D frame image: sized box (replaces the old .rose-canvas box),
+   with an inner absolutely-positioned <img> that main.js transforms
+   every frame in sync with scroll (translateY / rotate / scale) plus
+   a very subtle desktop-only mouse parallax.
+--------------------------------------------------------------------- */
+.frame-float {
+  position: relative;
+  width: min(90vw, 620px);
+  height: min(80vh, 760px);
+  /* idle floating drift — only runs while the user isn't actively
+     scrolling (toggled via the .is-idle class from main.js) so it
+     never fights the scroll-driven transform on the image itself. */
+  animation: frameFloatIdle 4.5s ease-in-out infinite alternate;
+  animation-play-state: paused;
+}
+
+.frame-float.is-idle {
+  animation-play-state: running;
+}
+
+@keyframes frameFloatIdle {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+.frame-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  z-index: 10;
+  will-change: transform;
+}
+
+@media (max-width: 640px) {
+  .rose-section { height: 260vh; }
+  .content-block { padding: 12vh 20px; }
+
+  .frame-float {
+    width: min(92vw, 420px);
+    height: min(70vh, 520px);
+  }
+
+  @keyframes frameFloatIdle {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-4px); }
+  }
+}

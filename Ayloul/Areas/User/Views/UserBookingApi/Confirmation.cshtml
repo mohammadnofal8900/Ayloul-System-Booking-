@@ -1,0 +1,84 @@
+﻿@model BookingConfirmViewModel
+
+<h2>Booking Confirmation</h2>
+
+<hr />
+
+
+<h4>Booking Information</h4>
+
+<p>
+    <strong>Name:</strong>
+
+    @Model.Name
+</p>
+
+<p>
+    <strong>Phone:</strong>
+    @Model.PhoneNumber
+</p>
+
+
+
+<p>
+    <strong>Delivery Date:</strong>
+    @Model.DeliverDate
+</p>
+
+<hr />
+
+<h4>Location</h4>
+
+<p>
+    <strong>Location:</strong>
+    @Model.City
+</p>
+
+<p>
+    <strong>Location Price:</strong>
+    @Model.Price
+</p>
+
+<hr />
+
+<h4>Price</h4>
+
+<p>
+    Base Price:
+    @Model.BasePrice
+</p>
+
+<p>
+    Service Fees:
+    @Model.ServiceFees
+</p>
+
+<h3>
+    Total:
+    @Model.TotalPrice
+   
+</h3>
+
+
+
+<hr />
+
+<h4>Payment Method</h4>
+
+<div class="mt-4">
+
+    <form asp-action="ConfirmCash" method="post">
+        <button type="submit" class="btn btn-success">
+            <i class="mdi mdi-cash"></i>
+            Pay Cash
+        </button>
+    </form>
+
+    <form asp-action="ConfirmVisa" asp-controller="UserBookingApi" method="post" class="mt-2">
+        <button type="submit" class="btn btn-primary">
+            <i class="mdi mdi-credit-card"></i>
+            Pay by Visa
+        </button>
+    </form>
+
+</div>

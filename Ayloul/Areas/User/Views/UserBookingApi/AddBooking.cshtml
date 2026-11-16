@@ -1,0 +1,393 @@
+﻿@model UserBookingEditVm
+
+<style>
+    .rose-card {
+        cursor: pointer;
+        transition: 0.2s;
+        border: 2px solid transparent;
+    }
+
+        .rose-card:hover {
+            transform: translateY(-3px);
+        }
+
+    .rose-radio:checked + span {
+        background-color: #0d6efd;
+        color: white;
+    }
+
+    .rose-card-label:has(.rose-radio:checked) .rose-card {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15) !important;
+
+    }
+
+    .service-card-label {
+        cursor: pointer;
+    }
+
+    .service-checkbox {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .service-card {
+        border: 3px solid transparent;
+        transition: all 0.2s ease;
+    }
+
+    .service-card-label:hover .service-card {
+        transform: translateY(-3px);
+    }
+    /* لما تكون الخدمة محددة */
+
+    .service-checkbox:checked + .service-card {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.20) !important;
+    }
+</style>
+<div class="card">
+    
+    <div class="card-body">
+
+        <form asp-action="AddBooking" asp-controller="UserBookingApi" asp-area="User" method="post" enctype="multipart/form-data">
+             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+
+                <div class="page-header">
+                    <h3 class="page-title">Booking</h3>
+                    <nav aria-label="breadcrumb">
+
+                    </nav>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    
+                    <input asp-for="Name" class="form-control" placeholder="Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                   
+                    <input asp-for="Phone_Number" class="form-control" placeholder="Phone Number" />
+                    <span asp-validation-for="Phone_Number" class="text-danger"></span>
+                </div>
+                <div class="col-md-6 mb-3">
+
+                    <select asp-for="Location_Id"
+                            asp-items="ViewBag.Location"
+                            class="form-select">
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+              
+                
+                <div class="col-md-6 mb-3">
+                    
+                    <input asp-for="Event_Date" class="form-control" placeholder="Event Date" />
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    
+                    <textarea asp-for="Description" class="form-control" placeholder="Description"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    
+                    <textarea asp-for="Note" class="form-control" placeholder="Note"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ImageFile"></label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                
+                
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Order_Date">Order Date</label>
+
+                    <input asp-for="Order_Date"
+                           type="datetime-local"
+                           class="form-control"
+                           min="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+
+                    <span asp-validation-for="Order_Date"
+                          class="text-danger"></span>
+                </div>
+               
+
+                <div class="col-md-6 mb-3">
+                    <div class="row">
+
+                        <h5 class="mb-3">Choose Frame Color</h5>
+
+                        @foreach (var item in ViewBag.FrameColorList)
+                        {
+                            <div class="col-md-4 mb-3">
+
+                                <label for="FrameColor_@item.FrameColor_Id"
+                                       class="rose-card-label w-100">
+
+                                    <input type="radio"
+                                           class="rose-radio"
+                                           name="FrameColor_Id"
+                                           value="@item.FrameColor_Id"
+                                           id="FrameColor_@item.FrameColor_Id">
+
+                                    <div class="card h-100 shadow-sm rose-card">
+
+                                        <img src="~/images/Frame_Color/@item.img"
+                                             class="card-img-top"
+                                             alt="@item.FrameColor_Color"
+                                             style="height:180px; object-fit:contain; background-color:#f8f9fa;" />
+
+                                        <div class="card-body text-center">
+                                            <h5 class="card-title mb-0">
+                                                @item.FrameColor_Color
+                                            </h5>
+                                        </div>
+
+                                    </div>
+
+                                </label>
+
+                            </div>
+                        }
+                    </div>
+                </div>
+
+
+               
+                
+
+                <div class="col-md-6 mb-3">
+                    <div class="row">
+
+                        <h5 class="mb-3">Choose Background Color</h5>
+
+                        @foreach (var item in ViewBag.BackgroundList)
+                        {
+                            <div class="col-md-4 mb-3">
+
+                                <label for="BackgroundColor_@item.BackgroundId"
+                                       class="rose-card-label w-100">
+
+                                    <input type="radio"
+                                           class="rose-radio"
+                                           name="Background_Id"
+                                           value="@item.BackgroundId"
+                                           id="BackgroundColor_@item.BackgroundId">
+
+                                    <div class="card h-100 shadow-sm rose-card">
+
+                                        <img src="~/images/Background_Color/@item.img"
+                                             class="card-img-top"
+                                             alt="@item.BackgroundColor"
+                                             style="height:180px; object-fit:contain; background-color:#f8f9fa;" />
+
+                                        <div class="card-body text-center">
+
+                                            <h5 class="card-title mb-0">
+                                                @item.BackgroundColor
+                                            </h5>
+
+                                        </div>
+
+                                    </div>
+
+                                </label>
+
+                            </div>
+                        }
+                        </div>
+                        </div>
+                        
+
+
+
+                    </div>
+                
+
+                 <div class="col-md-6 mb-3">
+                    <div class="row">
+
+                        <h5 class="mb-3">Choose Rose Color</h5>
+
+                        @foreach (var item in ViewBag.RoseColorList)
+                        {
+                            <div class="col-md-4 mb-3">
+
+                                <label for="roseColor1_@item.RoseColor_Id"
+                                       class="rose-card-label w-100">
+
+                                    <input type="radio"
+                                           class="rose-radio"
+                                           name="RoseColor1_Id"
+                                           value="@item.RoseColor_Id"
+                                           id="roseColor1_@item.RoseColor_Id">
+
+                                    <div class="card h-100 shadow-sm rose-card">
+
+                                        <img src="~/images/Rose_Color/@item.img"
+                                             class="card-img-top"
+                                             alt="@item.RoseColor_Name"
+                                         style="height:180px; object-fit:contain; background-color:#f8f9fa;" />
+
+                                        <div class="card-body text-center">
+
+                                            <h5 class="card-title mb-0">
+                                                @item.RoseColor_Name
+                                            </h5>
+
+                                        </div>
+
+                                    </div>
+
+                                </label>
+
+                            </div>
+                        }
+
+                    </div>
+
+
+
+
+
+
+                <div class="row">
+                <div class="col-md-6 mb-3">
+                    
+                    <select asp-for="RoseColor2_Id"
+                            asp-items="ViewBag.RoseColor"
+                            class="form-select">
+                        <option value="">Select Another Rose Color </option>
+                    </select>
+                </div>
+                <div class="col-md-6 mb-3">
+                    
+                    <select asp-for="RoseType_Id"
+                            asp-items="ViewBag.RoseType"
+                            class="form-select">
+                        <option value="">Select Rose Type</option>
+                    </select>
+                </div>
+                </div>
+                
+                <div class="col-md-12 mb-3">
+
+                    <h5 class="mb-3">Choose Services</h5>
+
+                    <div class="row">
+
+                            @foreach (var item in ViewBag.ServiceList)
+                            {
+                                <div class="col-md-4 mb-3">
+
+                                    <label for="service_@item.Service_Id"
+                                           class="service-card-label w-100">
+
+                                        <input class="service-checkbox"
+                                               type="checkbox"
+                                               name="Service_Id"
+                                               value="@item.Service_Id"
+                                               id="service_@item.Service_Id">
+
+                                        <div class="card h-100 shadow-sm service-card">
+
+                                            <img src="~/Images/Service/@item.img"
+                                                 class="card-img-top"
+                                                 alt="@item.Service_Name"
+                                             style="height:180px; object-fit:contain; background-color:#f8f9fa;" />
+
+                                            <div class="card-body text-center">
+
+                                                <h5 class="card-title">
+                                                    @item.Service_Name
+                                                </h5>
+
+                                                <p class="text-muted">
+                                                    Price: @item.Price JD
+                                                </p>
+
+                                            </div>
+
+                                        </div>
+
+                                    </label>
+
+                                </div>
+                            }
+
+ 
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Booking
+            </button>
+
+
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+
+<style>
+    .rose-card-label {
+        cursor: pointer;
+    }
+
+    .rose-radio {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .rose-card {
+        border: 3px solid transparent;
+        transition: all 0.2s ease;
+    }
+
+    .rose-card-label:hover .rose-card {
+        transform: translateY(-3px);
+    }
+
+    .rose-radio:checked + .rose-card {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.20) !important;
+    }
+</style>
+<script>
+    document.querySelectorAll('input[name="RoseColor2_Id"]').forEach(radio => {
+
+        radio.addEventListener('click', function () {
+
+            if (this.dataset.checked === "true") {
+                this.checked = false;
+                this.dataset.checked = "false";
+            } else {
+                document.querySelectorAll('input[name="RoseColor2_Id"]')
+                    .forEach(r => r.dataset.checked = "false");
+
+                this.dataset.checked = "true";
+            }
+
+        });
+
+    });
+</script>

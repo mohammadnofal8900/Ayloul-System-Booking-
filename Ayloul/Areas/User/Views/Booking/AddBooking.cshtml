@@ -1,0 +1,181 @@
+﻿@model Booking
+
+<div class="card">
+    <div class="card-header">
+        <h3>Add Booking</h3>
+    </div>
+
+    <div class="card-body">
+
+        <form asp-action="AddBooking" asp-controller="Booking" asp-area="User" method="post" enctype="multipart/form-data">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="row">
+
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Phone_Number"></label>
+                    <input asp-for="Phone_Number" class="form-control" />
+                    <span asp-validation-for="Phone_Number" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Date_Time"></label>
+                    <input asp-for="Date_Time" type="datetime-local" class="form-control" />
+                    <span asp-validation-for="Date_Time" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-12 mb-3">
+                    <label asp-for="Note"></label>
+                    <textarea asp-for="Note" class="form-control"></textarea>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label asp-for="ImageFile"></label>
+                    <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Event_Date"></label>
+                    <input asp-for="Event_Date" class="form-control" />
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Location_Id"></label>
+                    <select asp-for="Location_Id"
+                            asp-items="ViewBag.Location"
+                            class="form-select">
+                        <option value="">Select Location</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="FrameColor_Id"></label>
+                    <select asp-for="FrameColor_Id"
+                            asp-items="ViewBag.FrameColors"
+                            class="form-select">
+                        <option value="">Select Frame Color</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="Background_Id"></label>
+                    <select asp-for="Background_Id"
+                            asp-items="ViewBag.Backgrounds"
+                            class="form-select">
+                        <option value="">Select Background</option>
+                    </select>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RoseType_Id"></label>
+                    <select asp-for="RoseType_Id"
+                            asp-items="ViewBag.RoseTypes"
+                            class="form-select">
+                        <option value="">Select Rose Type</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RoseColor1_Id"></label>
+                    <select asp-for="RoseColor1_Id"
+                            asp-items="ViewBag.RoseColors"
+                            class="form-select">
+                        <option value="">Select First Rose Color</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label asp-for="RoseColor2_Id"></label>
+                    <select asp-for="RoseColor2_Id"
+                            asp-items="ViewBag.RoseColors"
+                            class="form-select">
+                        <option value="">Select Second Rose Color</option>
+                    </select>
+                </div>
+                <div class="col-md-12 mb-3">
+
+                    <h5 class="mb-3">Choose Services</h5>
+
+                    <div class="row">
+
+                        @foreach (var item in ViewBag.Services)
+                        {
+                            <div class="col-md-4 mb-3">
+
+                                <div class="card h-100 shadow-sm">
+
+                                    <img src="~/Images/Services/@item.img"
+                                         class="card-img-top"
+                                         style="height:180px; object-fit:cover;" />
+
+
+                                    <div class="card-body text-center">
+
+                                        <h5 class="card-title">
+                                            @item.Service_Name
+                                        </h5>
+
+
+                                        <p class="text-muted">
+                                            Price: @item.Price JD
+                                        </p>
+
+
+                                        <div class="form-check">
+
+                                            <input class="form-check-input"
+                                                   type="checkbox"
+                                                   name="ServiceIds"
+                                                   value="@item.Service_Id"
+                                                   id="service_@item.Service_Id">
+
+
+                                            <label class="form-check-label"
+                                                   for="service_@item.Service_Id">
+                                                Select Service
+                                            </label>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+                
+
+            </div>
+
+            <button type="submit" class="btn btn-success">
+                Save
+            </button>
+
+            
+
+        </form>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

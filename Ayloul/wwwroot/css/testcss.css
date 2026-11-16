@@ -1,0 +1,124 @@
+﻿body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5f7fb;
+    margin: 0;
+}
+
+/* Login */
+
+.login-container {
+    width: 400px;
+    margin: 100px auto;
+    background: white;
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px #ddd;
+}
+
+    .login-container h2 {
+        text-align: center;
+        color: #333;
+    }
+
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #6c5ce7;
+    color: white;
+    cursor: pointer;
+}
+
+
+    .btn:hover {
+        background: #5541d7;
+    }
+
+
+/* Dashboard Table */
+
+
+.card {
+    background: white;
+    padding: 25px;
+    margin: 40px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px #ddd;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+
+th {
+    background: #6c5ce7;
+    color: white;
+    padding: 12px;
+}
+
+
+td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+
+
+.create-btn {
+    background: #00b894;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+
+/* Logout */
+
+.logout-box {
+    width: 400px;
+    margin: 100px auto;
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+}
+
+.switch-modern {
+    transform: scale(1.4);
+    cursor: pointer;
+}
+
+.status-active {
+    display: inline-block;
+    background: #d1fae5;
+    color: #198754;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.status-inactive {
+    display: inline-block;
+    background: #fde2e1;
+    color: #dc3545;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}

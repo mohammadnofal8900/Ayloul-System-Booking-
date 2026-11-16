@@ -1,0 +1,136 @@
+﻿@model EmployeeCreateVm
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title"> Create Employee </h3>
+            <nav aria-label="breadcrumb">
+                
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    
+                </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        
+                        <form asp-action="CreateEmployee" asp-controller="Employee" method="post" enctype="multipart/form-data" class="forms-sample">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Full_Name">Name</label>
+                                <input asp-for="Full_Name" type="text" class="form-control" id="exampleInputName1" placeholder="User Name">
+                                <span asp-validation-for="Full_Name" class="text-danger"></span>
+
+                            </div>
+                            
+
+
+                            <div class="form-group">
+                                <label asp-for="Employee_Email">Email address</label>
+                                <input asp-for="Employee_Email" type="email" class="form-control" id="exampleInputEmail3" placeholder="Email Address">
+                                <span asp-validation-for="Employee_Email" class="text-danger"></span>
+
+                            </div>
+                            
+                            
+
+
+                            <div class="form-group">
+                                <label asp-for="Mobile_Phone">Mobile Phone</label>
+                                <input asp-for="Mobile_Phone" type="number" class="form-control" id="exampleInputName1" placeholder="Mobile Phone">
+                                <span asp-validation-for="Mobile_Phone" class="text-danger"></span>
+
+                            </div>
+
+                            
+                            <div class="form-group">
+                                <label asp-for="Employee_Date">Employee Date</label>
+                                <input asp-for="Employee_Date" type="date" class="form-control" id="exampleInputName1" placeholder="Employee Date">
+                                <span asp-validation-for="Employee_Date" class="text-danger"></span>
+
+                            </div>
+
+                            
+
+                            <div class="form-group">
+                                <label asp-for="Gender_Id">Gender</label>
+                                <select asp-for="Gender_Id" asp-items="ViewBag.Gender" class="form-select" id="exampleSelectGender">
+                                    <option value="">-- Select Gender --</option>
+                                </select>
+                                <span asp-validation-for="Gender_Id" class="text-danger"></span>
+
+                            </div>
+                            
+
+                            <div class="form-group">
+                                <label asp-for="Location_Id">Location</label>
+                                <select asp-for="Location_Id" asp-items="ViewBag.Location" class="form-select" id="exampleSelectGender">
+                                    <option value="">-- Select Location --</option>
+                                </select>
+                                <span asp-validation-for="Location_Id" class="text-danger"></span>
+
+                            </div>
+
+
+
+
+
+                            <div class="form-group">
+                                <label asp-for="Employee_Salary">Salary</label>
+                                <input asp-for="Employee_Salary" type="number" class="form-control" id="exampleInputName1" placeholder="Employee Salary">
+                                <span asp-validation-for="Employee_Salary" class="text-danger"></span>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <label asp-for="Department_Id">Department</label>
+                                <select asp-for="Department_Id" asp-items="ViewBag.Department" class="form-select" id="exampleSelectGender">
+                                    <option value="">-- Select Department --</option>
+                                </select>
+                                <span asp-validation-for="Department_Id" class="text-danger"></span>
+
+                            </div>
+                            
+                            
+
+
+
+                            <div class="form-group">
+                                <label asp-for="RoleName">Role</label>
+                                <select asp-for="RoleName" asp-items="ViewBag.Role" class="form-select" id="exampleSelectGender">
+                                    <option value="">-- Select Role --</option>
+                                </select>
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+                            
+
+                            
+                            
+                            
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <a class="btn btn-light" asp-area="Admin" asp-controller="Employee" asp-action="ViewEmployee">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+
+    <!-- partial -->
+</div>

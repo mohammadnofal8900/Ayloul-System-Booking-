@@ -1,0 +1,190 @@
+﻿@model BookingInfoVm
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">View Booking Info</h4>
+        <p class="card-description">
+
+
+            <h3 class="page-title">Booking View</h3>
+            <nav aria-label="breadcrumb">
+
+            </nav>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Event Date</th>
+                                <th>Location</th>
+                                
+                                <th>Service</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                
+                                <td>@Model.Name</td>
+                                <td>@Model.Description</td>
+                                <td>@Model.EventDate</td>
+                                <td>
+                                    @{
+                                        var location = ((List<LocationDropdownDto>)ViewBag.LocationList)
+                                        .FirstOrDefault(x => x.LocationId == Model.LocationId);
+                                    }
+
+                                    @(location?.City ?? "-")
+                                </td>
+                               
+                                
+                                <td>
+                                    @{
+                                        var serviceList = ViewBag.ServiceList as List<ServiceDropdownDto>;
+
+                                        var serviceNames = serviceList?
+                                        .Where(x => Model.ServiceId != null &&
+                                        Model.ServiceId.Contains(x.Service_Id))
+                                        .Select(x => x.Service_Name)
+                                        .ToList();
+                                    }
+
+                                    @(serviceNames != null && serviceNames.Any()
+                                                                        ? string.Join(", ", serviceNames)
+                                                                        : "-")
+                                </td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br />
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Background Color</th>
+                                <th>Frame Color</th>
+                                <th>Rose Type</th>
+                                <th>Rose Color 1</th>
+                                <th>Rose Color 2</th>
+
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                
+                                <td>
+                                    @{
+                                        var background = ((List<BackgroundDropdownDto>)ViewBag.BackgroundList)
+                                        .FirstOrDefault(x => x.BackgroundId == Model.Background);
+                                    }
+
+                                    @(background?.BackgroundColor ?? "-")
+                                </td>
+                                <td>
+                                    @{
+                                        var frameColor = ((List<FrameColorDropdownDto>)ViewBag.FrameColorList)
+                                        .FirstOrDefault(x => x.FrameColor_Id == Model.FrameColor);
+                                    }
+
+                                    @(frameColor?.FrameColor_Color ?? "-")
+                                </td>
+                                <td>
+                                    @{
+                                        var roseType = ((List<RoseTypeDropdownDto>)ViewBag.RoseTypeList)
+                                        .FirstOrDefault(x => x.RoseType_Id == Model.RoseType);
+                                    }
+
+                                    @(roseType?.RoseType_Name ?? "-")
+                                </td>
+                                <td>
+                                    @{
+                                        var roseColor1 = ((List<RoseColorDropdownDto>)ViewBag.RoseColorList)
+                                        .FirstOrDefault(x => x.RoseColor_Id == Model.RoseColor1_Id);
+                                    }
+
+                                    @(roseColor1?.RoseColor_Name ?? "-")
+                                </td>
+                                <td>
+                                    @{
+                                        var roseColor2 = ((List<RoseColorDropdownDto>)ViewBag.RoseColorList)
+                                        .FirstOrDefault(x => x.RoseColor_Id == Model.RoseColor2_Id);
+                                    }
+
+                                    @(roseColor2?.RoseColor_Name ?? "-")
+                                </td>
+
+
+
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                <th>Note</th>
+                                <th>Note Image</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+
+                                <td>@Model.Note</td>
+
+                                <td class="">
+                                    @if (!string.IsNullOrEmpty(Model.NoteImage))
+                                    {
+                                        <img style="width:400px;height:400px;border-radius:8px" src="~/images/Booking/@Model.NoteImage" />
+                                        <br />
+                                        <br />
+
+                                        <a asp-append-version="true"
+                                           href="~/images/Booking/@Model.NoteImage"
+                                           download="@Model.NoteImage"
+                                           class="btn btn-primary">
+                                            Download Image
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <br />
+
+                    <a asp-action="EditBooking"
+                       asp-controller="BookingApi"
+                       asp-area="Admin"
+                       asp-route-id="@Model.BookingId"
+                       class="btn btn-warning btn-sm">
+                        <i class="mdi mdi-pencil"> Edit Order</i>
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- content-wrapper ends -->
+<!-- partial:../../partials/_footer.html -->
+<!-- partial -->

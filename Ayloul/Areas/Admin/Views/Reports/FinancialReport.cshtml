@@ -1,0 +1,282 @@
+﻿@model FinancialReportVM
+
+
+<!-- partial -->
+<div class="card">
+    <div class="card-body">
+
+
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-home"></i>
+                </span> Dashboard
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">
+                            Today's Revenue  <i class="mdi mdi-chart-line mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@Model.TodayRevenue JD</h2>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">
+                            
+                            Total Revenue<i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@Model.TotalRevenue JD</h2>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">
+                            This Month   <i class="mdi mdi-chart-line mdi-24px float-end"></i>                        </h4>
+                        <h2 class="mb-5">@Model.MonthRevenue JD</h2>
+                        
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">
+                            Completed Bookings <i class="mdi mdi-diamond mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@Model.CompletedBookings</h2>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">
+                            Accepted Bookings <i class="mdi mdi-diamond mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@Model.AcceptedBookings</h2>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image">
+                        <h4 class="font-weight-normal mb-3">
+                            Pending Bookings <i class="mdi mdi-diamond mdi-24px float-end"></i>
+
+                        </h4>
+                        <h2 class="mb-5">@Model.PendingBookings</h2>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+        </div>
+
+
+
+
+        <div class="card">
+            <div class="card-body">
+
+                <h4 class="card-title">
+                    Monthly Revenue
+                </h4>
+
+                <p class="card-description">
+                    Revenue for @DateTime.Now.Year
+                </p>
+
+                <canvas id="profitChart"></canvas>
+
+            </div>
+        </div>
+
+
+        <div class="row">
+           
+            <a asp-action="ExportExcel" type="button" class="btn btn-gradient-success btn-fw">Export Excel</a>
+
+            <a asp-action="ExportPdf" type="button" class="btn btn-gradient-danger btn-fw" style="margin-top:50px">Export PDF</a>
+         </div>
+
+       
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Recent Tickets</h4>
+                        <div class="table-responsive">
+
+
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Email</th>
+                                        <th>Salary</th>
+                                        <th>Phone Number</th>
+                                        <th>Gender</th>
+                                        <th>Date</th>
+                                        <th>Status</th>
+                                        <th>Location</th>
+                                        <th>Department</th>
+                                        <th>Role</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.Employees)
+                                    {
+                                        <tr>
+
+                                            <td>@item.Employee_Email</td>
+                                            <td>@item.Employee_Salary</td>
+                                            <td>@item.Mobile_Phone</td>
+                                            <td>@item.Gender?.Gender_Name</td>
+                                            <td>@item.Employee_Date.ToString("dd-MMMM-yyyy")</td>
+                                            <td>
+                                                @if (item.Is_Active == true)
+                                                {
+                                                    <span class="badge badge-success">Active</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge badge-danger">Not Active</span>
+                                                }
+                                            </td>
+                                            <td>@item.Location?.City</td>
+                                            <td>@item.department?.Department_Name</td>
+                                            <td>@ViewBag.Roles[item.UserId]</td>
+
+
+
+
+
+                                       </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:partials/_footer.html -->
+    <!-- partial -->
+</div>
+<!-- main-panel ends -->
+<!-- page-body-wrapper ends -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+
+    const months = @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(
+                        Model.MonthlyProfits.Select(x => x.Month)
+                )
+        );
+
+    const profits = @Html.Raw(
+                System.Text.Json.JsonSerializer.Serialize(
+                        Model.MonthlyProfits.Select(x => x.Profit)
+                )
+        );
+
+
+    const ctx = document
+        .getElementById('profitChart')
+        .getContext('2d');
+
+
+    new Chart(ctx, {
+
+        type: 'line',
+
+        data: {
+
+            labels: months,
+
+            datasets: [{
+                label: 'Revenue (JD)',
+
+                data: profits,
+
+                borderWidth: 2,
+
+                tension: 0.4,
+
+                fill: false,
+
+                pointRadius: 4
+
+            }]
+
+        },
+
+        options: {
+
+            responsive: true,
+
+            scales: {
+
+                y: {
+                    beginAtZero: true,
+
+                    title: {
+                        display: true,
+                        text: 'Revenue (JD)'
+                    }
+                },
+
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Month'
+                    }
+                }
+
+            }
+
+        }
+
+    });
+
+</script>

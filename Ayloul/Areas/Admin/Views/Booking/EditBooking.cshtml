@@ -1,0 +1,198 @@
+﻿
+@model Booking
+
+
+<div class="card">
+    <div class="card-body">
+        
+        <p class="card-description">
+
+
+            <h3 class="page-title">  Edit Booking </h3>
+            <nav aria-label="breadcrumb">
+                
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        
+                        <form asp-action="EditBooking" asp-controller="Booking" asp-area="Admin" method="post" enctype="multipart/form-data" class="forms-sample">
+                            @Html.AntiForgeryToken()
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div><input type="hidden" asp-for="Booking_Id" /></div>
+
+                            <div class="form-group">
+                                <label asp-for="Name">Name</label>
+                                <input asp-for="Name" type="text" class="form-control"  placeholder=" Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+
+                            </div>
+                            
+
+
+                            <div class="form-group">
+                                <label asp-for="Phone_Number"> Phone Number</label>
+                                <input asp-for="Phone_Number" type="text" class="form-control"  placeholder=" Phone Number">
+                                <span asp-validation-for="Phone_Number" class="text-danger"></span>
+
+                            </div>
+                            
+                            
+
+
+                            <div class="form-group">
+                                <label asp-for="Date_Time">Date Time</label>
+                                <input asp-for="Date_Time" type="datetime-local" class="form-control" placeholder="Mobile Phone">
+                                <span asp-validation-for="Date_Time" class="text-danger"></span>
+
+                            </div>
+                           
+                            
+                            <div class="form-group">
+                                <label asp-for="Description"></label>
+                                <input asp-for="Description" type="text" class="form-control" id="exampleInputName1" placeholder="Employee Date">
+                                <span asp-validation-for="Description" class="text-danger"></span>
+
+                            </div>
+                            
+
+
+                            <div class="form-group">
+                                <label asp-for="Note">Note</label>
+                                <input asp-for="Note" type="text" class="form-control" id="exampleInputName1" placeholder="Employee Salary">
+                                <span asp-validation-for="Note" class="text-danger"></span>
+
+                            </div>
+
+
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Event_Date">Event Date</label>
+                                <input asp-for="Event_Date" class="form-control" />
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Location_Id">Location</label>
+                                <select asp-for="Location_Id"
+                                        asp-items="ViewBag.Location"
+                                        class="form-select">
+                                    <option value="">Select Location</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="FrameColor_Id">Frame Color</label>
+                                <select asp-for="FrameColor_Id"
+                                        asp-items="ViewBag.FrameColors"
+                                        class="form-select">
+                                    <option value="">Select Frame Color</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Background_Id">Background</label>
+                                <select asp-for="Background_Id"
+                                    asp-items="ViewBag.Backgrounds"
+                                        class="form-select">
+                                    <option value="">Select Background</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RoseType_Id">Rose Type</label>
+                                <select asp-for="RoseType_Id"
+                                        asp-items="ViewBag.RoseTypes"
+                                        class="form-select">
+                                    <option value="">Select Rose Type</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RoseColor1_Id">First Rose Color</label>
+                                <select asp-for="RoseColor1_Id"
+                                        asp-items="ViewBag.RoseColors"
+                                        class="form-select">
+                                    <option value="">Select First Rose Color</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="RoseColor2_Id">Second Rose Color</label>
+                                <select asp-for="RoseColor2_Id"
+                                        asp-items="ViewBag.RoseColors"
+                                        class="form-select">
+                                    <option value="">Select Second Rose Color</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="bookingStatus">booking Status</label>
+
+                                <select asp-for="bookingStatus"
+                                        asp-items="Html.GetEnumSelectList<Booking.BookingStatus>()"
+                                        class="form-select">
+
+                                    <option value="">Select Status</option>
+                                    <span asp-validation-for="bookingStatus" class="text-danger"></span>
+                                </select>
+
+                            <div class="form-group" style="margin-left:10vh">
+
+                                <div class="form-check form-switch">
+                                    <input asp-for="Is_Active"
+                                           class="form-check-input"
+                                           
+                                   id="statusSwitch" />
+
+                                    <p  id="statusText" >
+                                          @(Model.Is_Active ? "Active" : "Inactive")
+                            </p>
+                            </div>
+                            </div>
+                            
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ImageFile"></label>
+                                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                            </div>
+
+
+
+                            
+
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <a class="btn btn-light" asp-area="Admin" asp-controller="Booking" asp-action="ViewBooking">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+
+    <!-- partial -->
+</div>
+<script>
+    const sw = document.getElementById("statusSwitch");
+    const txt = document.getElementById("statusText");
+
+    sw.addEventListener("change", function () {
+        if (this.checked) {
+            txt.innerText = "Active";
+            txt.classList.remove("text-danger");
+            txt.classList.add("text-success");
+        } else {
+            txt.innerText = "Inactive";
+            txt.classList.remove("text-success");
+            txt.classList.add("text-danger");
+        }
+    });
+</script>

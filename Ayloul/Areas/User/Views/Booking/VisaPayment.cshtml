@@ -1,0 +1,14 @@
+﻿@model Booking
+<form asp-action="VisaPayment" method="post">
+    @Html.AntiForgeryToken
+
+    <input type="hidden" name="id" value="@Model.Booking_Id" />
+
+   
+        <label>Visa</label>
+    
+    <button class="btn btn-success mt-3">
+        Pay Now
+    </button>
+
+</form>

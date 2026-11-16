@@ -1,0 +1,61 @@
+﻿
+@model RoseType
+
+
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="card-header bg-danger text-white" style="margin-bottom:30px">
+            <h4 class="mb-0" style="padding:40px"> Delete Rose Type</h4>
+        </div>
+
+
+        <div class="card-body">
+
+            <h5 class="text-danger">
+                are you sure you need to delete this Rose Type : @Model.RoseType_Name
+            </h5>
+
+            <hr />
+
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Name</label>
+                <p>@Model.RoseType_Name</p>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Description</label>
+                <p>@Model.RoseType_Description</p>
+            </div>
+
+
+
+                <form asp-action="DeleteRoseType" asp-controller="Product" method="post">
+
+                    <input type="hidden" asp-for="@Model.RoseType_Id" />
+
+
+                    <button type="submit" class="btn btn-danger">
+                        <i class="mdi mdi-delete"></i>
+                        Delete
+                    </button>
+
+
+                    <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewRoseType">Cancel</a>
+
+
+
+                </form>
+
+            </div>
+        </div>
+        </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+      
+        <!-- partial -->

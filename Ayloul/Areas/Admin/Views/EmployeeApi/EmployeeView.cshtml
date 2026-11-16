@@ -1,0 +1,116 @@
+﻿@model IEnumerable<EmployeeVm>
+
+<div class="card">
+    <div class="content-wrapper">
+        <div class="page-header">
+        <h4 class="card-title">View Employee</h4>
+        <nav aria-label="breadcrumb">
+        
+            <a class="btn btn-inverse-primary btn-fw"
+               asp-action="CreateEmployee"
+               asp-controller="EmployeeApi"
+               asp-area="Admin">
+                Add Employee
+            </a>
+        </nav>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Salary</th>
+                    <th>Phone Number</th>
+                    <th>Gender</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Location</th>
+                    <th>Department</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        
+                        <td>@item.Employee_Email</td>
+
+                        <td>@item.Employee_Salary</td>
+
+                        <td>@item.Mobile_Phone</td>
+
+                        <td>@item.Gender</td>
+
+                        <td>
+                            @item.Employee_Date.ToString("dd-MMMM-yyyy")
+                        </td>
+
+                        <td>
+                            @if (item.Is_Active == true)
+                            {
+                                <span class="badge badge-success">
+                                    Active
+                                </span>
+                            }
+                            else
+                            {
+                                <span class="badge badge-danger">
+                                    Not Active
+                                </span>
+                            }
+                        </td>
+
+                        <td>
+                            @item.Location
+                        </td>
+
+                        <td>
+                            @item.Department
+                        </td>
+
+                        <td>
+                            @item.RoleName
+                        </td>
+
+                        <td>
+
+                            <a asp-action="EditEmployee"
+                               asp-controller="EmployeeApi"
+                               asp-area="Admin"
+                               asp-route-id="@item.Employee"
+                               class="btn btn-outline-primary rounded-pill px-3 py-0"
+                               style="font-size: 0.75rem;width:50px">
+
+                                <i class="mdi mdi-pencil"></i>
+
+                            </a>
+                            <form asp-action="DeleteEmployee"
+                                  asp-controller="EmployeeApi"
+                                  asp-area="Admin"
+                                  asp-route-id="@item.Employee"
+                                  method="post"
+                                  onsubmit="return confirm('Are you sure you want to delete this employee?');">
+
+
+
+
+                                <button type="submit" class="btn btn-outline-danger rounded-pill px-3 py-0"
+                                        style="font-size: 0.75rem;width:50px;margin-top:10px">
+                                    <i class="mdi mdi-delete"></i>
+                                </button>
+
+                            </form>
+
+                        </td>
+
+                    </tr>
+                }
+                
+            </tbody>
+        </table>
+
+    </div>
+</div>

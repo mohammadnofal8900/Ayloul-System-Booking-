@@ -1,0 +1,56 @@
+﻿
+@model FrameColor
+
+
+
+
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="card-header bg-danger text-white" style="margin-bottom:30px">
+            <h4 class="mb-0" style="padding:40px"> Delete Frame Color</h4>
+        </div>
+
+
+        <div class="card-body">
+
+            <h5 class="text-danger">
+                are you sure you need to delete this Frame Color : @Model.FrameColor_Color .
+            </h5>
+
+            <hr />
+
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Frame Color</label>
+                <p>@Model.FrameColor_Color</p>
+            </div>
+
+
+
+
+            <form asp-action="DeleteFrame" asp-controller="Product" method="post" enctype="multipart/form-data">
+
+                <div><input type="hidden" asp-for="FrameColor_Id" /></div>
+
+                @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="mdi mdi-delete"></i>
+                        Delete
+                    </button>
+
+                <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewFrame">Cancel</a>
+
+
+                </form>
+
+            </div>
+        </div>
+        </div>
+       <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+     
+        <!-- partial -->

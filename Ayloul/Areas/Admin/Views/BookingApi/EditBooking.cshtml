@@ -1,0 +1,229 @@
+﻿@model BookingEditVm
+
+
+<div class="card">
+    <div class="card-body">
+
+        <p class="card-description">
+
+
+            <h3 class="page-title">  Edit Booking </h3>
+            <nav aria-label="breadcrumb">
+
+            </nav>
+    </div>
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+        </div>
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+
+
+                    <form asp-action="EditBooking" asp-controller="BookingApi" asp-area="Admin" method="post" enctype="multipart/form-data" class="forms-sample">
+                        @Html.AntiForgeryToken()
+                        
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div><input type="hidden" asp-for="BookingId" /></div>
+                        <input type="hidden" asp-for="NoteImage" />
+                        <div><input type="hidden" asp-for="CustomerId" /></div>
+
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+
+                     
+
+
+                        <div class="form-group">
+                            <label asp-for="Name">Name</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder=" Name">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+
+                        </div>
+
+
+
+                        
+
+
+
+
+                        <div class="form-group">
+                            <label asp-for="EventDate">Event Date</label>
+                            <input asp-for="EventDate" type="text" class="form-control" placeholder="Mobile Phone">
+                            <span asp-validation-for="EventDate" class="text-danger"></span>
+
+                        </div>
+
+
+                        <div class="form-group">
+                            <label asp-for="Description"></label>
+                            <input asp-for="Description" type="text" class="form-control" id="exampleInputName1" placeholder="Booking Date">
+                            <span asp-validation-for="Description" class="text-danger"></span>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label asp-for="Note">Note</label>
+                            <input asp-for="Note" type="text" class="form-control" id="exampleInputName1" placeholder="Note">
+                            <span asp-validation-for="Note" class="text-danger"></span>
+
+                        </div>
+
+
+                        @* <div class="col-md-6 mb-3">
+                            <label asp-for="ServiceId">Service</label>
+                            <select asp-for="ServiceId"
+                                    asp-items="ViewBag.Service"
+                                    class="form-select">
+                                <option value="">Select Service</option>
+                            </select>
+                        </div>
+ *@
+   
+ 
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Services</label>
+
+                            @foreach (var service in ViewBag.ServiceList)
+                            {
+                                <div class="form-check mb-2">
+
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           name="ServiceId"
+                                           value="@service.Service_Id"
+                                           id="service_@service.Service_Id"
+                                           @(Model.ServiceId.Contains(service.Service_Id) ? "checked" : "") />
+
+                                    <label class="form-check-label"
+                                           for="service_@service.Service_Id">
+                                        @service.Service_Name
+                                    </label>
+
+                                </div>
+                            }
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="LocationId">Location</label>
+                            <select asp-for="LocationId"
+                                    asp-items="ViewBag.Location"
+                                    class="form-select">
+                                <option value="">Select Location</option>
+                            </select>
+                            <span asp-validation-for="LocationId" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="FrameColor">Frame Color</label>
+                            <select asp-for="FrameColor"
+                                    asp-items="ViewBag.FrameColor"
+                                    class="form-select">
+                                <option value="">Select Frame Color</option>
+                            </select>
+                            <span asp-validation-for="FrameColor" class="text-danger"></span>
+                        </div>
+                        
+                         <div class="col-md-6 mb-3">
+                            <label asp-for="Background">Background</label>
+                            <select asp-for="Background"
+                                    asp-items="ViewBag.Background"
+                                    class="form-select">
+                                <option value="">Select Background</option>
+                            </select>
+                            <span asp-validation-for="Background" class="text-danger"></span>
+                        </div>
+                       
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RoseType">Rose Type</label>
+                            <select asp-for="RoseType"
+                                    asp-items="ViewBag.RoseType"
+                                    class="form-select">
+                                <option value="">Select Rose Type</option>
+                            </select>
+                            <span asp-validation-for="RoseType" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RoseColor1_Id">First Rose Color</label>
+                            <select asp-for="RoseColor1_Id"
+                                    asp-items="ViewBag.RoseColor"
+                                    class="form-select">
+                                <option value="">Select First Rose Color</option>
+                            </select>
+                            <span asp-validation-for="RoseColor1_Id" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="RoseColor2_Id">Second Rose Color</label>
+                            <select asp-for="RoseColor2_Id"
+                                    asp-items="ViewBag.RoseColor"
+                                    class="form-select">
+                                <option value="">Select Second Rose Color</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label asp-for="bookingStatus">booking Status</label>
+
+                            <select asp-for="bookingStatus"
+                                    asp-items="Html.GetEnumSelectList<Booking.BookingStatus>()"
+                                    class="form-select">
+
+                                <option value="">Select Status</option>
+                                <span asp-validation-for="bookingStatus" class="text-danger"></span>
+                            </select>
+ 
+                            <div class="form-group" style="margin-left:10vh">
+
+                                <div class="form-check form-switch">
+                                    <input asp-for="IsActive"
+                                           class="form-check-input"
+                                           id="statusSwitch" />
+
+                                    <p id="statusText">
+                                        @(Model.IsActive ? "Active" : "Inactive")
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ImageFile"></label>
+                                <input asp-for="ImageFile" type="file" class="form-control" accept="image/*" />
+                                <span asp-validation-for="ImageFile" class="text-danger"></span>
+                            </div>
+
+
+
+
+
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <a class="btn btn-light" asp-area="Admin" asp-controller="Booking" asp-action="Booking">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content-wrapper ends -->
+<!-- partial:../../partials/_footer.html -->
+<!-- partial -->
+</div>
+<script>
+    const sw = document.getElementById("statusSwitch");
+    const txt = document.getElementById("statusText");
+
+    sw.addEventListener("change", function () {
+        if (this.checked) {
+            txt.innerText = "Active";
+            txt.classList.remove("text-danger");
+            txt.classList.add("text-success");
+        } else {
+            txt.innerText = "Inactive";
+            txt.classList.remove("text-success");
+            txt.classList.add("text-danger");
+        }
+    });
+</script>

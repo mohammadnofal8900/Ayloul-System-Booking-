@@ -1,0 +1,139 @@
+﻿@model Booking
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">View Booking Info</h4>
+        <p class="card-description">
+
+
+            <h3 class="page-title">Booking View</h3>
+            <nav aria-label="breadcrumb">
+
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Event Date</th>
+                                    <th>Location</th>
+                                    <th>Booking Status</th>
+                                    <th>Service</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>@Model.Name</td>
+                                    <td>@Model.Description</td>
+                                    <td>@Model.Event_Date</td>
+                                    <td>@Model.Location?.City</td>
+                                    <td>@Model.bookingStatus</td>
+                                    <td>
+                                        @(Model.BookingServices != null && Model.BookingServices.Any()
+                                                                                ? string.Join(" + ", Model.BookingServices
+                                                                                .Where(bs => bs.Service != null)
+                                                                                .Select(bs => bs.Service.Service_Name))
+                                                                                : "-")
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Background Color</th>
+                                    <th>Frame Color</th>
+                                    <th>Rose Type</th>
+                                    <th>Rose Color 1</th>
+                                    <th>Rose Color 2</th>
+                                   
+                                    
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>@Model.Background?.Background_Color</td>
+                                    <td>@Model.FrameColor?.FrameColor_Color</td>
+                                    <td>@Model.RoseType?.RoseType_Name</td>
+                                    <td>@Model.RoseColor1?.RoseColor_Name</td>
+                                    <td>@(Model.RoseColor2?.RoseColor_Name ?? "-")</td>
+                                  
+
+                                  
+
+                                    
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                
+                                <th>Note</th>
+                                <th>Note Image</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                
+                                <td>@Model.Note</td>
+
+                                <td class="">
+                                    @if (!string.IsNullOrEmpty(Model.Note_Image))
+                                    {
+                                        <img style="width:400px;height:400px;border-radius:8px" src="~/images/Booking/@Model.Note_Image"
+                                             
+                                              />
+                                        <br />
+                                        <br />
+
+                                        <a asp-append-version="true"
+                                           href="~/images/Booking/@Model.Note_Image"
+                                           download="@Model.Note_Image"
+                                           class="btn btn-primary">
+                                            Download Image
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span>-</span>
+                                    }
+                                </td>
+
+
+                            </tr>
+                        </tbody>
+                    </table>
+
+                        <br />
+                        
+                            <a asp-action="EditBooking"
+                               asp-controller="Booking"
+                               asp-area="Admin"
+                               asp-route-id="@Model.Booking_Id"
+                               class="btn btn-warning btn-sm">
+                                <i class="mdi mdi-pencil"> Edit Order</i>
+                            </a>
+                        
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    
+    <!-- partial -->

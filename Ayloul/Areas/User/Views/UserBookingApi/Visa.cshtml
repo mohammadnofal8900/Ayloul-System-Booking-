@@ -1,0 +1,158 @@
+﻿@model Ayloul.Areas.User.Models.VisaPaymentViewModel
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <h3 class="page-title">
+                Visa Payment
+            </h3>
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-md-8 col-lg-6">
+
+                <div class="card shadow-sm border-0">
+
+                    <div class="card-body p-4">
+
+                        <div class="text-center mb-4">
+
+                            <div class="mb-3">
+                                <i class="mdi mdi-credit-card-outline"
+                                   style="font-size: 60px; color: #0d6efd;">
+                                </i>
+                            </div>
+
+                            <h3 class="font-weight-bold">
+                                Secure Payment
+                            </h3>
+
+                            <p class="text-muted">
+                                Enter your card details to complete your booking.
+                            </p>
+
+                        </div>
+
+                        <form asp-action="PayVisa"
+                              method="post">
+
+                            <!-- CARD HOLDER -->
+
+                            <div class="form-group mb-3">
+
+                                <label asp-for="CardHolderName"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="CardHolderName"
+                                       class="form-control"
+                                       placeholder="Card Holder Name" />
+
+                                <span asp-validation-for="CardHolderName"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+
+                            <!-- CARD NUMBER -->
+
+                            <div class="form-group mb-3">
+
+                                <label asp-for="CardNumber"
+                                       class="form-label">
+                                </label>
+
+                                <input asp-for="CardNumber"
+                                       class="form-control"
+                                       placeholder="1234 5678 9012 3456"
+                                       maxlength="19"
+                                       autocomplete="cc-number" />
+
+                                <span asp-validation-for="CardNumber"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+
+                            <div class="row">
+
+                                <!-- EXPIRY -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label asp-for="ExpiryDate"
+                                           class="form-label">
+                                    </label>
+
+                                    <input asp-for="ExpiryDate"
+                                           class="form-control"
+                                           placeholder="MM/YY"
+                                           maxlength="5"
+                                           autocomplete="cc-exp" />
+
+                                    <span asp-validation-for="ExpiryDate"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+
+                                <!-- CVV -->
+
+                                <div class="col-md-6 mb-3">
+
+                                    <label asp-for="CVV"
+                                           class="form-label">
+                                    </label>
+
+                                    <input asp-for="CVV"
+                                           type="password"
+                                           class="form-control"
+                                           placeholder="•••"
+                                           maxlength="4"
+                                           autocomplete="cc-csc" />
+
+                                    <span asp-validation-for="CVV"
+                                          class="text-danger">
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- PAYMENT BUTTON -->
+
+                            <div class="d-grid mt-4">
+
+                                <button type="submit"
+                                        class="btn btn-primary btn-lg">
+
+                                    <i class="mdi mdi-lock-check-outline"></i>
+
+                                    Pay Securely
+
+                                </button>
+
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<RoseColor>
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">Rose Color</h3>
+            <nav aria-label="breadcrumb">
+
+                <a class="btn btn-inverse-primary btn-fw" asp-action="AddRoseColor" asp-controller="Product">Add Rose Color</a>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Color</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.RoseColor_Name</td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(item.img))
+                                            {
+                                                <img src="~/Images/Rose_Color/@item.img"
+                                                
+                                                     width="100"
+                                                     height="100"
+                                                     style="object-fit:cover;width:150px;height:150px"
+                                                     asp-append-version="true" />
+                                            }
+                                            else
+                                            {
+                                                <span>No Image</span>
+                                            }
+                                        </td>
+
+                                        <td>
+
+                                            <a asp-action="EditRoseColor"
+                                               asp-controller="Product"
+                                               asp-area="Admin"
+                                               asp-route-id="@item.RoseColor_Id"
+                                               class="btn btn-outline-warning btn-fw">
+                                                <i class="mdi mdi-pencil">Edit</i>
+                                            </a>
+
+                                            <a asp-action="DeleteRoseColor"
+                                               asp-controller="Product"
+                                               asp-area="Admin"
+                                               asp-route-id="@item.RoseColor_Id"
+                                               class=" btn btn-outline-danger btn-fw">
+                                                <i class="mdi mdi-delete">Delete</i>
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+    
+    <!-- partial -->
+</div>

@@ -1,0 +1,474 @@
+﻿@{
+	Layout = null;
+}
+@using Ayloul.Models
+@using Ayloul.Data
+@using Ayloul.Migrations
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.Extensions.Localization
+@* @using Ayloul.Areas.Identity.Models *@
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stellar by HTML5 UP</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="stylesheet" href="~/assets3/css/main.css">
+	<noscript><link rel="stylesheet" href="~/assets3/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<span class="logo"><img src="~/assets3/css/images/LogoAyloul.webp" alt=""></span>
+			<h1>Ayloul Jo</h1>
+			<p>
+				Choose the flowers that reflect who you are<br>
+				and let us take care of the rest
+			</p>
+		</header>
+
+		<!-- Nav -->
+		<nav id="nav">
+			<ul>
+				@if (User.Identity.IsAuthenticated &&
+														(User.IsInRole("Admin") || User.IsInRole("Super Admin")))
+				{
+					<a class="active" asp-action="FinancialReport" asp-area="Admin" asp-controller="Reports">Dashboard</a>
+					
+				}
+				else
+				{
+					
+					<li><a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" class="active">Booking</a></li>
+				}
+				
+				<li class="nav-item">
+                            @if (signInManager.IsSignedIn(User))  
+					{
+						<a class="active" asp-area="User" asp-controller="Profile" asp-action="Profile">Profile</a>
+						}
+									else
+						{
+						<li><a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" class="active">logIn</a></li>
+						}
+				<li><a href="#intro" class="active">Introduction</a></li>
+				<li><a href="#first">First Section</a></li>
+				<li><a href="#second">Second Section</a></li>
+				<li><a href="#cta">Get Started</a></li>
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+
+			<!-- Introduction -->
+			<section id="intro" class="main">
+				<div style="height:40vh">
+				</div>
+				<main>
+					<section id="snapping" class="section">
+						<div class="content">
+							<!-- Header -->
+
+
+							<h2><strong>First</strong>, we set up the <em>snapping</em> points</h2>
+
+							<div class="text cool-design">
+
+								<div class="image-card">
+									<div class="image-glow"></div>
+									<img src="~/images/Frame_img.jpg" alt="Scroll Snap">
+								</div>
+
+								<div class="info-card">
+
+									<a asp-action ="AddBooking" asp-area="User" asp-controller="UserBookingApi" class="info-item" style="text-decoration:none">
+										<span class="step-number">01</span>
+
+										<div class="info-content">
+											<h3>
+												Choose your rose... <code class="selector">and let it speak for you .</code>
+												Add a personal touch to your gift.
+												The flowers that resemble you are waiting for <code class="property"> you</code>
+											</h3>
+										</div>
+									</a>
+
+										<a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" style="text-decoration:none" class="info-item">
+										<span class="step-number">02</span>
+
+										<div class="info-content">
+											<h3>
+												<code class="selector">Browse a wide </code>variety of flowers and bouquets,
+												and view product photos, details, and prices <code class="property"> before</code> making your selection
+
+											</h3>
+										</div>
+									</a>
+
+								</div>
+
+							</div>
+						</div>
+					</section>
+
+
+					<section id="caveats" class="section">
+						<div class="content">
+							<h2><strong>Caveats</strong></h2>
+
+							<div class="cool-design reverse-layout">
+
+								<!-- TEXT AREA -->
+								<div class="info-card">
+
+									<a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" style="text-decoration:none" class="info-item">
+
+										<span class="step-number">03</span>
+
+										<div class="info-content">
+											<h3>
+												Choose the flowers that suit you best, and<code class="selector">customize</code>
+												the color, size, and available details to <code class="property">create your bouquet</code> exactly the way you like it
+
+
+
+											</h3>
+										</div>
+
+									</a>
+
+
+									<a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" style="text-decoration:none" class="info-item">
+
+										<span class="step-number">04</span>
+
+										<div class="info-content">
+											<h3>
+												Pre-book your package and select a convenient <code class="selector">delivery time</code>
+												so your gift arrives exactly when you<code class="property"> want it</code>.
+
+											</h3>
+										</div>
+
+									</a>
+
+								</div>
+
+
+								<!-- IMAGE -->
+								<div class="image-card">
+
+									<div class="image-glow"></div>
+
+									<img src="~/images3/WhatsApp Image 2026-07-14 at 12.00.03 AM.jpeg" alt="Scroll Snap">
+
+								</div>
+
+							</div>
+						</div>
+					</section>
+
+
+
+					<section id="caveats" class="section">
+						<div class="content">
+
+							<h2><strong>Caveats</strong></h2>
+
+							<div class="cool-design">
+
+								<!-- IMAGE -->
+								<div class="image-card">
+
+									<div class="image-glow"></div>
+
+									<img src="~/images3/WhatsApp Image 2026-07-14 at 12.55.06 AM.jpeg"
+										 alt="Customize your bouquet">
+
+								</div>
+
+
+								<!-- TEXT AREA -->
+								<div class="info-card">
+
+									<a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" style="text-decoration:none" class="info-item">
+
+										<span class="step-number">05</span>
+
+										<div class="info-content">
+											<h3>
+												Choose the flowers that reflect
+												<code class="selector">who you are</code>
+												and let us <code class="property">take care</code> of the rest
+
+
+											</h3>
+										</div>
+
+									</a>
+
+
+									<a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" style="text-decoration:none" class="info-item">
+
+										<span class="step-number">06</span>
+
+										<div class="info-content">
+											<h3>
+												Everything you need to choose
+
+												customize, reserve, pay, and deliver your flower is
+												<code class="property">in one place</code>
+											</h3>
+										</div>
+
+									</a>
+
+								</div>
+
+							</div>
+
+						</div>
+					</section>
+
+
+
+
+
+				</main>
+
+				<div style="height:60vh">
+				</div>
+			</section>
+
+			<!-- First Section -->
+			<section id="first" class="main special">
+				<header class="major">
+					<h2>Magna veroeros</h2>
+				</header>
+				<ul class="features">
+					<li>
+						<span class="icon solid major style1 fa-leaf"></span>
+						<h3>Choose Your Rose</h3>
+						<p>
+							Choose the perfect rose and customize its color, size,
+							and details to create a bouquet that matches your style.
+						</p>
+					</li>
+
+					<li>
+						<span class="icon solid major style3 fa-comments"></span>
+						<h3>Chat With Us</h3>
+						<p>
+							Contact us directly through messages and get help
+							with your flowers, bouquet customization, and orders.
+						</p>
+					</li>
+
+					<li>
+						<span class="icon solid major style5 fa-truck"></span>
+						<h3>Fast Delivery</h3>
+						<p>
+							Choose your preferred delivery time and let us make
+							sure your beautiful bouquet arrives right on time.
+						</p>
+					</li>
+				</ul>
+				<footer class="major">
+					<ul class="actions special">
+						<li><a href="generic.html" class="button">Learn More</a></li>
+					</ul>
+				</footer>
+			</section>
+
+			<!-- Second Section -->
+			<section id="second" class="main special">
+				<header class="major">
+					<h2>Discover our previous work</h2>
+					<p>
+						Browse our previous designs and choose what suits your taste
+					</p>
+				</header>
+
+
+
+
+
+				<div class="external">
+					<div class="horizontal-scroll-wrapper">
+						<div class="img-wrapper slower">
+							<a href="https://altphotos.com/photo/stylish-parisian-cafe-terrace-279/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/paris-cafe-terrace.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper faster">
+							<a href="https://altphotos.com/photo/retro-boy-doll-wearing-elegant-clothes-330/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/antiquedollboy.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower vertical">
+							<a href="https://altphotos.com/photo/clocks-shop-exposition-window-reflecting-the-streets-277/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/windowshopclock.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower slower-down">
+							<a href="https://altphotos.com/photo/swans-and-ducks-swimming-in-a-river-264/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/swanduckriver.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper">
+							<a href="https://altphotos.com/photo/sidewalk-terrace-of-a-blue-facade-cafe-312/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/cafe-terrace.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower">
+							<a href="https://altphotos.com/photo/paris-waterfront-at-sunset-1555/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/paris-seine-boat.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper faster1">
+							<a href="https://altphotos.com/photo/old-man-leaning-over-the-barrier-looking-at-the-river-265/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/old-man-river.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower slower2">
+							<a href="https://altphotos.com/photo/cafe-terrace-with-a-row-of-retro-tables-261/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/cafe-table-street.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper">
+							<a href="https://altphotos.com/photo/street-scene-with-pedestrians-and-dogs-318/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/street-scene-people.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower">
+							<a href="https://altphotos.com/photo/tourist-barge-on-the-river-seine-near-notre-dame-266/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/notre-dame-river-boat.jpg" alt="">
+							</a>
+						</div>
+
+						<div class="img-wrapper slower last">
+							<a href="https://altphotos.com/photo/skulls-decoration-in-a-shop-window-331/" target="_blank" rel="noopener">
+								<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/74321/shop-window-reflection.jpg" alt="">
+							</a>
+						</div>
+					</div>
+
+				</div>
+
+
+
+
+
+
+				<p class="content">Nam elementum nisl et mi a commodo porttitor. Morbi sit amet nisl eu arcu faucibus hendrerit vel a risus. Nam a orci mi, elementum ac arcu sit amet, fermentum pellentesque et purus. Integer maximus varius lorem, sed convallis diam accumsan sed. Etiam porttitor placerat sapien, sed eleifend a enim pulvinar faucibus semper quis ut arcu. Ut non nisl a mollis est efficitur vestibulum. Integer eget purus nec nulla mattis et accumsan ut magna libero. Morbi auctor iaculis porttitor. Sed ut magna ac risus et hendrerit scelerisque. Praesent eleifend lacus in lectus aliquam porta. Cras eu ornare dui curabitur lacinia.</p>
+				<footer class="major">
+					<ul class="actions special">
+						<li><a href="generic.html" class="button">Learn More</a></li>
+					</ul>
+				</footer>
+			</section>
+
+			<!-- Get Started -->
+			<section id="cta" class="main special">
+				<header class="major">
+					<h2>Because every feeling has a rose</h2>
+					<p>
+						Choose the flowers and bouquets that best suit your taste,<br>
+						customize your order just the way you like,
+						then book and pay online to have it delivered to your loved ones at the perfect time and place
+					</p>
+				</header>
+				<footer class="major">
+					<ul class="actions special">
+						<li><a asp-action="AddBooking" asp-area="User" asp-controller="UserBookingApi" class="button primary">Get Started</a></li>
+						<li><a href="generic.html" class="button">Learn More</a></li>
+					</ul>
+				</footer>
+			</section>
+
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<section>
+				<h2>Aliquam sed mauris</h2>
+				<p>Sed lorem ipsum dolor sit amet et nullam consequat feugiat consequat magna adipiscing tempus etiam dolore veroeros. eget dapibus mauris. Cras aliquet, nisl ut viverra sollicitudin, ligula erat egestas velit, vitae tincidunt odio.</p>
+				<ul class="actions">
+					<li><a href="generic.html" class="button">Learn More</a></li>
+				</ul>
+			</section>
+			<section>
+				<h2>Etiam feugiat</h2>
+				<dl class="alt">
+					<dt>Address</dt>
+					<dd>1234 Somewhere Road • Nashville, TN 00000 • USA</dd>
+					<dt>Phone</dt>
+					<dd>(000) 000-0000 x 0000</dd>
+					<dt>Email</dt>
+					<dd><a href="#">information@untitled.tld</a></dd>
+				</dl> 
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-twitter alt"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-facebook-f alt"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram alt"><span class="label">Instagram</span></a></li>
+					<li><a href="#" class="icon brands fa-github alt"><span class="label">GitHub</span></a></li>
+					<li><a href="#" class="icon brands fa-dribbble alt"><span class="label">Dribbble</span></a></li>
+				</ul>
+			</section>
+			<p class="copyright">© Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="~/assets3/js/jquery.min.js"></script>
+	<script src="~/assets3/js/jquery.scrollex.min.js"></script>
+	<script src="~/assets3/js/jquery.scrolly.min.js"></script>
+	<script src="~/assets3/js/browser.min.js"></script>
+	<script src="~/assets3/js/breakpoints.min.js"></script>
+	<script src="~/assets3/js/util.js"></script>
+	<script src="~/assets3/js/main.js"></script>
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+
+			const nav = document.getElementById("nav");
+
+			if (!nav) return;
+
+			const navTop = nav.offsetTop;
+
+			window.addEventListener("scroll", function () {
+
+				if (window.scrollY >= navTop) {
+					nav.classList.add("sticky");
+				} else {
+					nav.classList.remove("sticky");
+				}
+
+			});
+
+		});
+	</script>
+
+</body>
+</html>

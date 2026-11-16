@@ -1,0 +1,58 @@
+﻿
+
+@model RoseColor
+
+
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="card-header bg-danger text-white" style="margin-bottom:30px">
+            <h4 class="mb-0" style="padding:40px"> Delete Rose Color</h4>
+        </div>
+
+
+        <div class="card-body">
+
+            <h5 class="text-danger">
+                are you sure you need to delete this Rose Color : @Model.RoseColor_Name
+            </h5>
+
+            <hr />
+
+
+            <div class="col-md-6 mb-3">
+                <label class="fw-bold">Name</label>
+                <p>@Model.RoseColor_Name</p>
+            </div>
+
+            
+
+
+                <form asp-action="DeleteRoseColor" asp-controller="Product" method="post">
+
+                    <input type="hidden" asp-for="@Model.RoseColor_Id" />
+
+                @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">
+                        <i class="mdi mdi-delete"></i>
+                        Delete
+                    </button>
+
+
+                    <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewRoseColor">Cancel</a>
+
+
+
+                </form>
+
+            </div>
+        </div>
+        </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+       
+        <!-- partial -->

@@ -1,0 +1,111 @@
+﻿@using Ayloul.Data
+@model IEnumerable<ApplicationUser>
+
+<div class="card">
+    <div class="card-body">
+
+        <h3 class="page-title">Customers</h3>
+
+        <nav aria-label="breadcrumb">
+        </nav>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+
+            <div class="card">
+                <div class="card-body">
+
+                    <table class="table">
+
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Status</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td>
+                                        <i class="fa fa-user-circle"></i>
+                                    </td>
+
+                                    <td>
+                                        @item.Id
+                                    </td>
+
+                                    <td>
+                                        @item.FUllName
+                                    </td>
+
+                                    <td>
+                                        @item.Email
+                                    </td>
+
+                                    <td>
+                                        @item.PhoneNumber
+                                    </td>
+
+                                    <td>
+                                        <form asp-action="ChangeStatus"
+                                              asp-controller="Customer"
+                                              asp-area="Admin"
+                                              method="post"
+                                              class="d-flex align-items-center gap-3">
+
+                                            <input type="hidden"
+                                                   name="id"
+                                                   value="@item.Id" />
+
+                                            <input class="form-check-input switch-modern"
+                                                   type="checkbox"
+                                                   name="isActive"
+                                                   value="true"
+                                                   @(item.Is_Active ? "checked" : "")
+                                                   onchange="this.form.submit()" />
+
+                                            @if (item.Is_Active)
+                                            {
+                                                <span class="status-active">
+                                                    Active
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="status-inactive">
+                                                    Inactive
+                                                </span>
+                                            }
+
+                                        </form>
+                                    </td>
+
+                                    <td>
+                                        @item.Note
+                                    </td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,357 @@
+﻿@* 
+@model IEnumerable<Booking>
+<link href="~/assets/css/style.css" rel="stylesheet" />
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">My Booking</h3>
+            <nav aria-label="breadcrumb">
+
+            </nav>
+        </div>
+
+    <div class="card-body">
+
+        @if (!Model.Any()){
+            <div class="alert alert-info text-center">
+                You don't have any bookings yet.
+            </div>}
+        
+        else
+        {
+
+            <table class="table table-bordered table-hover text-center align-middle">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Booking Number</th>
+                        <th>Booking Date</th>
+                        <th>Delivery Date</th>
+                        <th>Services</th>
+                        <th>Location</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        
+                        <th>Background</th>
+                        <th>RoseColor 1</th>
+                        <th>RoseColor 2</th>
+                        <th>FrameColor</th>
+                        <th></th>
+                               
+                </thead>
+
+
+                <tbody>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @item.Booking_Number
+                            </td>
+
+
+                            <td>
+                                @item.Order_Date.ToString("dd/MM/yyyy")
+                            </td>
+
+
+                            <td>
+                                @item.Date_Time.ToString("dd/MM/yyyy HH:mm")
+                            </td>
+
+
+                            <td>
+
+                                @if (item.BookingServices != null &&
+                                                        item.BookingServices.Any())
+                                {
+                                    foreach (var service in item.BookingServices)
+                                    {
+                                        <span class="badge bg-primary">
+                                            @service.Service.Service_Name
+                                        </span>
+                                        <br />
+                                    }
+                                }
+                                else
+                                {
+                                    <span>-</span>
+                                }
+
+                            </td>
+
+
+                            <td>
+                                @item.Location?.City
+                            </td>
+
+
+                            <td>
+                                @item.TotalPrice JD
+                            </td>
+
+
+                            <td>
+
+                                @switch (item.bookingStatus)
+                                {
+                                    case Booking.BookingStatus.pending:
+                                        <span class="badge bg-warning">
+                                            Pending
+                                        </span>
+                                        break;
+
+
+                                    case Booking.BookingStatus.accepted:
+                                        <span class="badge bg-success">
+                                            Accepted
+                                        </span>
+                                        break;
+
+
+                                    
+
+
+                                    case Booking.BookingStatus.completed:
+                                        <span class="badge bg-primary">
+                                            Completed
+                                        </span>
+                                        break;
+
+
+                                    case Booking.BookingStatus.cancelled:
+                                        <span class="badge bg-secondary">
+                                            Cancelled
+                                        </span>
+                                        break;
+                                }
+
+                            </td>
+                            <td>@item.Background?.Background_Color</td>
+                            <td>@item.RoseColor1?.RoseColor_Name</td>
+                            <td>@item.RoseColor2?.RoseColor_Name</td>
+                            <td>@item.FrameColor?.FrameColor_Color</td>
+
+                                  
+                                        @if(item.bookingStatus != Booking.BookingStatus.completed)
+                                        {
+
+
+                                            <td>
+                                                <form asp-action="ChangeActiveStatus"
+                                                asp-controller="Booking"
+                                                asp-area="User"
+                                                method="post">
+
+                                                    <input type="hidden" name="id" value="@item.Booking_Id" />
+
+                                                    <input type="checkbox"
+                                                    name="isActive"
+                                                    value="true"
+                                                    @(item.Is_Active ? "checked" : "") />
+
+                                                    <button type="submit" class="btn btn-success btn-sm">
+                                                        Confirm
+                                                    </button>
+
+                                                </form>
+                                            </td>
+                                        } 
+
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+
+        }
+
+    </div>
+
+</div>
+</div>
+
+
+<script>
+    document.querySelectorAll(".booking-active").forEach(item => {
+
+        item.addEventListener("change", function () {
+
+            let id = this.dataset.id;
+            let isActive = this.checked;
+
+            fetch('/Admin/Booking/ChangeActiveStatus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: id,
+                    isActive: isActive
+                })
+            });
+
+        });
+
+    });
+</script>
+ *@
+ 
+ 
+ 
+ @model List<MyBookingDto>
+
+<div class="main-panel">
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <h3 class="page-title">
+                My Bookings
+            </h3>
+        </div>
+
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="alert alert-info">
+                You don't have any bookings yet.
+            </div>
+        }
+        else
+        {
+            <div class="row">
+
+                @foreach (var booking in Model)
+                {
+                    <div class="col-md-6 grid-margin stretch-card">
+
+                        <div class="card" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;">
+
+                            <div class="card-body">
+
+                                <div class="d-flex justify-content-between">
+
+                                    <h4 class="card-title">
+                                        Booking #@booking.BookingNumber
+                                    </h4>
+
+                                    <span>
+                                        @booking.TotalPrice.ToString("0.00") JD
+                                    </span>
+
+                                </div>
+
+
+                                <hr />
+
+
+                                <p>
+                                    <strong>Name:</strong>
+                                    @booking.Name
+                                </p>
+
+                                <p>
+                                    <strong>Phone:</strong>
+                                    @booking.PhoneNumber
+                                </p>
+
+                                <p>
+                                    <strong>Description:</strong>
+                                    @booking.Description
+                                </p>
+
+                                <p>
+                                    <strong>Location:</strong>
+                                    @booking.LocationName
+                                </p>
+
+                                <p>
+                                    <strong>Delivery Date:</strong>
+                                    @booking.DeliveryDate.ToString("dd/MM/yyyy hh:mm tt")
+                                </p>
+
+                                <p>
+                                    <strong>Order Date:</strong>
+                                    @booking.OrderDate.ToString("dd/MM/yyyy hh:mm tt")
+                                </p>
+
+
+                                @if (booking.Services != null &&
+                                                        booking.Services.Any())
+                                {
+                                    <p>
+                                        <strong>Services:</strong>
+                                    </p>
+
+                                    <ul>
+                                        @foreach (var service in booking.Services)
+                                        {
+                                            <li>
+                                                @service
+                                            </li>
+                                        }
+                                    </ul>
+                                }
+
+
+                                <p>
+                                    <strong>Status:</strong>
+
+                                    @if (booking.BookingStatus == 1)
+                                    {
+                                        <span class="badge badge-warning">
+                                            Pending
+                                        </span>
+                                    }
+                                    else if (booking.BookingStatus == 2)
+                                    {
+                                        <span class="badge badge-info">
+                                            Accepted
+                                        </span>
+                                    }
+                                    else if (booking.BookingStatus == 4)
+                                    {
+                                        <span class="badge badge-success">
+                                            Completed
+                                        </span>
+                                    }
+                                    else if (booking.BookingStatus == 5)
+                                    {
+                                        <span class="badge badge-danger">
+                                            Cancelled
+                                        </span>
+                                    }
+                                </p>
+                                <p>
+                                    
+                                
+                                <p>
+                                    <strong>Payment:</strong>
+
+                                    @if (booking.PaymentMethod == 0)
+                                    {
+                                        <span>Cash</span>
+                                    }
+                                    else if (booking.PaymentMethod == 1)
+                                    {
+                                        <span>Visa</span>
+                                    }
+                                    }
+
+
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+
+    </div>
+</div>

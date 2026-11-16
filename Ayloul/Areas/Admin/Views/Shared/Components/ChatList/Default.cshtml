@@ -1,0 +1,66 @@
+﻿@model List<Message>
+
+<li class="nav-item dropdown">
+
+    <a class="nav-link count-indicator dropdown-toggle"
+       data-bs-toggle="dropdown">
+
+        <i class="mdi mdi-email-outline"></i>
+
+        <span class="count-symbol bg-warning"></span>
+
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-end navbar-dropdown preview-list">
+
+        <h6 class="p-3 mb-0">
+            Messages
+        </h6>
+
+        <div class="dropdown-divider"></div>
+
+        @foreach (var msg in Model)
+        {
+            <a class="dropdown-item preview-item"
+               asp-area="Admin"
+               asp-controller="Chat"
+               asp-action="ChatRoom"
+               asp-route-id="@msg.ChatRoom_Id">
+
+                <div class="preview-thumbnail">
+                    <i class="fa fa-user-circle text-primary"></i>
+                </div>
+
+                <div class="preview-item-content">
+
+                    <h6 class="preview-subject mb-1">
+                        @msg.ChatRoom.Customer.FUllName
+                    </h6>
+
+                    <p class="text-muted mb-0">
+                        @msg.Message_Text
+                    </p>
+
+                    <small>
+                        @msg.SentAt.ToString("HH:mm")
+                    </small>
+
+                </div>
+
+            </a>
+
+            <div class="dropdown-divider"></div>
+        }
+
+        <a asp-area="Admin"
+           asp-controller="Chat"
+           asp-action="Index"
+           class="dropdown-item text-center">
+
+            See All
+
+        </a>
+
+    </div>
+
+</li>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<Booking>
+
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">View Booking</h4>
+        <p class="card-description">
+
+
+        </div>
+        <div class="row">
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                      
+                    <div class="card-body">
+                        <h4 class="card-title">Pending</h4>
+                        <p class="card-description">Pending reservation </p>
+                        <div class="template-demo">
+
+                        <a asp-action="GetBookingByStatus"
+                               asp-controller="BookingApi"
+                               asp-area="Admin"
+                               asp-route-status="@Booking.BookingStatus.pending"
+                               class="btn btn-inverse-warning btn-fw">
+                               Pending
+                            </a>
+                                
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">Accepted </h4>
+                        <p class="card-description">accepted reservation </p>
+                        <div class="template-demo">
+
+                        <a asp-action="GetBookingByStatus"
+                               asp-controller="BookingApi"
+                               asp-area="Admin"
+                               asp-route-status="@Booking.BookingStatus.accepted"
+                               class="btn btn-inverse-info btn-fw">
+                                accepted
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <h4 class="card-title">Completed </h4>
+                        <p class="card-description">Completed reservation </p>
+                        <div class="template-demo">
+
+                        <a asp-action="GetBookingByStatus"
+                               asp-controller="BookingApi"
+                               asp-area="Admin"
+                               asp-route-status="@Booking.BookingStatus.completed"
+                               class="btn btn-inverse-success btn-fw">
+                                Completed
+                            </a>
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="card-body">
+                        <h4 class="card-title">Cancelled </h4>
+                        <p class="card-description">Cancelled reservation </p>
+                        <div class="template-demo">
+
+                        <a asp-action="GetBookingByStatus"
+                               asp-controller="BookingApi"
+                               asp-area="Admin"
+                               asp-route-status="@Booking.BookingStatus.cancelled"
+                               class="btn btn-inverse-danger btn-fw">
+                                Cancelled
+                            </a>
+                            
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->

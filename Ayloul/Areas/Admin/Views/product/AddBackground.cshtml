@@ -1,0 +1,69 @@
+﻿
+@model Background
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">Add Background</h3>
+            <nav aria-label="breadcrumb">
+
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+
+                        <form asp-action="AddBackground" asp-controller="Product" method="post" enctype="multipart/form-data" class="forms-sample">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            
+
+                            <div class="form-group">
+                                <label asp-for="Background_Color">Rose Color </label>
+                                <input asp-for="Background_Color" type="text" class="form-control" id="exampleInputName1" placeholder="Enter Background Color">
+                                <span asp-validation-for="Background_Color" class="text-danger"></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label asp-for="ImageFile">
+                                    File upload
+                                </label>
+
+                                <input asp-for="ImageFile"
+                                       type="file"
+                                       class="form-control"
+                                       accept="image/*" />
+                                <span asp-validation-for="ImageFile"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+
+                            <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewBackground">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+    <!-- partial:../../partials/_footer.html -->
+   
+    <!-- partial -->
+</div>
+
+

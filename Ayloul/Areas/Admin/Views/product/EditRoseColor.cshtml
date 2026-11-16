@@ -1,0 +1,71 @@
+﻿
+@model RoseColor
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">Edit Rose Color</h3>
+            <nav aria-label="breadcrumb">
+                
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    
+                </div>
+            </div>
+            <div class="col-md-6 grid-margin stretch-card">
+                <div class="card">
+                    
+                </div>
+            </div>
+            <div class="col-12 grid-margin stretch-card">
+                <div class="card">
+                    <div class="card-body">
+                        
+                        
+                        <form asp-action="EditRoseColor" asp-controller="Product" method="post" enctype="multipart/form-data" class="forms-sample">
+                            @Html.AntiForgeryToken()
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div><input type="hidden" asp-for="RoseColor_Id" /></div>
+
+                            <div class="form-group">
+                                <label asp-for="RoseColor_Name">Rose Color </label>
+                                <input asp-for="RoseColor_Name" type="text" class="form-control" id="exampleInputName1" placeholder="Enter Rose Color">
+                                <span asp-validation-for="RoseColor_Name" class="text-danger"></span>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label asp-for="ImageFile">
+                                    File upload
+                                </label>
+
+                                <input asp-for="ImageFile"
+                                       type="file"
+                                       class="form-control"
+                                       accept="image/*" />
+                                <span asp-validation-for="ImageFile"
+                                      class="text-danger">
+                                </span>
+
+                            </div>
+                            
+                           <button type="submit" class="btn btn-gradient-primary me-2">Submit</button>
+                            <a class="btn btn-light" asp-area="Admin" asp-controller="Product" asp-action="ViewRoseColor">Cancel</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- content-wrapper ends -->
+
+</div>
+
+

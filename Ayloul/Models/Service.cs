@@ -1,0 +1,34 @@
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Ayloul.Models
+{
+    public class Service
+    {
+        [Key]
+        public int Service_Id { get; set; }
+        
+        [Required(ErrorMessage = "please Enter Service Name .")]
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Please Enter between 3 to 20 char .")]
+        public string Service_Name { get; set; }
+
+        [Required(ErrorMessage = "please Enter Service Price .")]
+        public int Price { get; set; }
+
+        [ValidateNever]
+        [DefaultValue(true)]
+        public bool Is_Active { get; set; } = true;
+
+        public string? img { get; set; } = null;
+
+        [NotMapped]
+        public IFormFile? ImageFile { get; set; }
+
+        //public string? Image_Path { get; set; }
+
+        [ValidateNever]
+        public ICollection<BookingService> BookingServices { get; set; } = new List<BookingService>();
+    }
+}
